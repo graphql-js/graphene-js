@@ -43,8 +43,9 @@ export class ObjectType extends GraphQLClassType {
   }
   static get fields(): UnmountedFieldMap {
     var interfaceFields = {};
-    for (let _interfaceIndex in this._interfaces) {
-      let _interface: typeof Interface = this._interfaces[_interfaceIndex];
+    var interfaces = this.interfaces;
+    for (let _interfaceIndex in interfaces) {
+      let _interface: typeof Interface = interfaces[_interfaceIndex];
       interfaceFields = {
         ...interfaceFields,
         ..._interface.fields
@@ -87,7 +88,8 @@ export class ObjectType extends GraphQLClassType {
       fieldName
     ] || this.prototype[fieldName]);
     if (!parentResolver) {
-      for (let _interface of this._interfaces) {
+      var interfaces = this.interfaces;
+      for (let _interface of interfaces) {
         let interfaceResolver = _interface.getResolver(fieldName);
         if (interfaceResolver !== undefined) {
           parentResolver = interfaceResolver;
