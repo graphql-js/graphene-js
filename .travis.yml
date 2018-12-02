@@ -15,8 +15,8 @@ cache:
 install:
   - npm config set spin=false
   - npm install -g coveralls
-  - npm install
   - npm install graphql@$GRAPHQL_VERSION
+  - npm install
 
 script:
   - npm run lint
